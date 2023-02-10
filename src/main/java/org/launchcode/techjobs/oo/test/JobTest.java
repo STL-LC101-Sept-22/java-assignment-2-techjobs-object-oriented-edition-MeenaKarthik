@@ -57,4 +57,58 @@ public class JobTest {
         assertFalse("test two objects are NOT equal when their id differs",
                 jobObject1.getId() == jobObject2.getId());
     }
+
+    @Test
+    public void testToStringStartsAndEndsWithNewLine(){
+        Job jobObject = new Job("Product tester",new Employer("ACME"),new Location("Desert"),
+                new PositionType("Quality control"),new CoreCompetency("Persistence"));
+        String jobData = jobObject.toString();
+        //System.out.println("job data: "+jobData);
+        assertEquals("verify first character of the toString method output is a newline character",
+                '\n', jobData.charAt(0));
+        assertEquals("verify last character of the toString method output is a newline character",
+                '\n', jobData.charAt(jobData.length()-1));
+    }
+
+    @Test
+    public void testToStringContainsCorrectLabelsAndData(){
+        Job jobObject = new Job("Product tester",new Employer("ACME"),new Location("Desert"),
+                new PositionType("Quality control"),new CoreCompetency("Persistence"));
+        String jobData = jobObject.toString();
+        //System.out.println("job data: "+jobData);
+        assertEquals("verify toString method outputs correct labels and data",
+                "\nID: "+jobObject.getId()+"\n"+
+                "Name: Product tester\n" +
+                "Employer: ACME\n" +
+                "Location: Desert\n" +
+                "Position Type: Quality control\n" +
+                "Core Competency: Persistence\n",
+                jobData);
+    }
+
+    @Test
+    public void testToStringHandlesEmptyField(){
+        Job jobObject1 = new Job("",new Employer("ACME"),new Location("Desert"),
+                new PositionType(""),new CoreCompetency("Persistence"));
+        Job jobObject2 = new Job("",new Employer(""),new Location(""),
+                new PositionType(""),new CoreCompetency(""));
+
+        String jobData = jobObject1.toString();
+        System.out.println("job data: "+jobData);
+        assertEquals("verify toString method handles empty field",
+                "\nID: "+jobObject1.getId()+"\n"+
+                        "Name: Data not available\n" +
+                        "Employer: ACME\n" +
+                        "Location: Desert\n" +
+                        "Position Type: Data not available\n" +
+                        "Core Competency: Persistence\n",
+                jobData);
+
+        jobData = jobObject2.toString();
+        System.out.println("job data: "+jobData);
+        assertEquals("verify toString method handles all empty fields",
+                "OOPS! This job does not seem to exist.",
+                jobData);
+    }
+
 }

@@ -46,6 +46,36 @@ public class Job {
         return Objects.hash(id);
     }
 
+    //create a custom toString() to print particular job data
+    @Override
+    public String toString(){
+
+        String displayName = this.getName();
+        String displayEmployer = this.getEmployer().getValue();
+        String displayLocation = this.getLocation().getValue();
+        String displayPositionType = this.getPositionType().getValue();
+        String displayCoreCompetency = this.getCoreCompetency().getValue();
+        String noData = "Data not available";
+
+        if(displayName.isEmpty()) displayName = noData;
+        if(displayEmployer.isEmpty()) displayEmployer = noData;
+        if(displayLocation.isEmpty()) displayLocation = noData;
+        if(displayPositionType.isEmpty()) displayPositionType = noData;
+        if(displayCoreCompetency.isEmpty()) displayCoreCompetency = noData;
+
+        if(displayName.equals(noData) && displayEmployer.equals(noData) && displayLocation.equals(noData)
+                && displayPositionType.equals(noData) && displayCoreCompetency.equals(noData))
+        return "OOPS! This job does not seem to exist.";
+        else
+        return  "\nID: "+this.getId()+
+            "\nName: "+displayName+
+            "\nEmployer: "+displayEmployer+
+            "\nLocation: "+displayLocation+
+            "\nPosition Type: "+displayPositionType+
+            "\nCore Competency: "+displayCoreCompetency+
+            "\n";
+    }
+
 
     // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
     //  and id.
