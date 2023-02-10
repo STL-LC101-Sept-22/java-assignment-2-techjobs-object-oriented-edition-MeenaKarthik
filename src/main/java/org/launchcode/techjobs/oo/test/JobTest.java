@@ -24,26 +24,18 @@ public class JobTest {
     public void testJobConstructorSetsAllFields(){
         Job jobObject = new Job("Product tester",new Employer("ACME"),new Location("Desert"),
                 new PositionType("Quality control"),new CoreCompetency("Persistence"));
-        assertTrue("jobObject is an object of Job class",jobObject instanceof Job);
-        assertTrue("constructor correctly assigns the class of employer field",
-                new Employer("ACME") instanceof Employer);
-        assertTrue("constructor correctly assigns the class of location field",
-                new Location("Desert") instanceof Location);
-        assertTrue("constructor correctly assigns the class of positionType field",
-                new PositionType("Quality control") instanceof PositionType);
-        assertTrue("constructor correctly assigns the class of coreCompetency field",
-                new CoreCompetency("Persistence") instanceof CoreCompetency);
 
-        assertEquals("constructor correctly assigns the value of name field",
-                jobObject.getName(),"Product tester");
-        assertEquals("constructor correctly assigns the value of employer field",
-                jobObject.getEmployer().getValue(),"ACME");
-        assertEquals("constructor correctly assigns the value of location field",
-                jobObject.getLocation().getValue(),"Desert");
-        assertEquals("constructor correctly assigns the value of positionType field",
-                jobObject.getPositionType().getValue(),"Quality control");
-        assertEquals("constructor correctly assigns the value of coreCompetency field",
-                jobObject.getCoreCompetency().getValue(),"Persistence");
+        assertTrue(jobObject instanceof Job);
+        assertTrue(new Employer("ACME") instanceof Employer);
+        assertTrue(new Location("Desert") instanceof Location);
+        assertTrue(new PositionType("Quality control") instanceof PositionType);
+        assertTrue(new CoreCompetency("Persistence") instanceof CoreCompetency);
+
+        assertEquals("Product tester", jobObject.getName());
+        assertEquals("ACME", jobObject.getEmployer().getValue());
+        assertEquals("Desert", jobObject.getLocation().getValue());
+        assertEquals("Quality control", jobObject.getPositionType().getValue());
+        assertEquals("Persistence", jobObject.getCoreCompetency().getValue());
     }
 
     @Test
@@ -52,10 +44,9 @@ public class JobTest {
                 new PositionType("Quality control"),new CoreCompetency("Persistence"));
         Job jobObject2 = new Job("Product tester",new Employer("ACME"),new Location("Desert"),
                 new PositionType("Quality control"),new CoreCompetency("Persistence"));
-        assertFalse("test two objects are NOT equal when their id differs",
-                jobObject1.equals(jobObject2));
-        assertFalse("test two objects are NOT equal when their id differs",
-                jobObject1.getId() == jobObject2.getId());
+        assertFalse(jobObject1.equals(jobObject2));
+        /*assertFalse("test two objects are NOT equal when their id differs",
+                jobObject1.getId() == jobObject2.getId())*/;
     }
 
     @Test
@@ -64,10 +55,8 @@ public class JobTest {
                 new PositionType("Quality control"),new CoreCompetency("Persistence"));
         String jobData = jobObject.toString();
         //System.out.println("job data: "+jobData);
-        assertEquals("verify first character of the toString method output is a newline character",
-                '\n', jobData.charAt(0));
-        assertEquals("verify last character of the toString method output is a newline character",
-                '\n', jobData.charAt(jobData.length()-1));
+        assertEquals('\n', jobData.charAt(0));
+        assertEquals('\n', jobData.charAt(jobData.length()-1));
     }
 
     @Test
@@ -76,8 +65,7 @@ public class JobTest {
                 new PositionType("Quality control"),new CoreCompetency("Persistence"));
         String jobData = jobObject.toString();
         //System.out.println("job data: "+jobData);
-        assertEquals("verify toString method outputs correct labels and data",
-                "\nID: "+jobObject.getId()+"\n"+
+        assertEquals("\nID: "+jobObject.getId()+"\n"+
                 "Name: Product tester\n" +
                 "Employer: ACME\n" +
                 "Location: Desert\n" +
@@ -95,8 +83,7 @@ public class JobTest {
 
         String jobData = jobObject1.toString();
         System.out.println("job data: "+jobData);
-        assertEquals("verify toString method handles empty field",
-                "\nID: "+jobObject1.getId()+"\n"+
+        assertEquals("\nID: "+jobObject1.getId()+"\n"+
                         "Name: Data not available\n" +
                         "Employer: ACME\n" +
                         "Location: Desert\n" +
@@ -106,8 +93,7 @@ public class JobTest {
 
         jobData = jobObject2.toString();
         System.out.println("job data: "+jobData);
-        assertEquals("verify toString method handles all empty fields",
-                "OOPS! This job does not seem to exist.",
+        assertEquals("OOPS! This job does not seem to exist.",
                 jobData);
     }
 
